@@ -1,92 +1,19 @@
-const startButton = document.querySelector("#start-button");
-const introCard = document.querySelector(".intro-card");
-const questionnaire = document.querySelector("#questionnaire");
-const questionForm = document.querySelector("#question-form");
-const result = document.querySelector("#result");
+const questions=[
+{id:"activities",type:"checkbox",title:"Was macht Ihr Unternehmen mit Verpackungen oder verpackten Waren?",help:"Mehrfachauswahl möglich. Denken Sie auch an Versand- und Transportverpackungen.",options:[["ownBrand","Wir stellen Verpackungen oder verpackte Produkte unter eigenem Namen oder eigener Marke her oder lassen sie herstellen."],["custom","Wir lassen Verpackungen nach unseren konkreten Vorgaben entwickeln oder individuell anfertigen."],["thirdCountry","Wir bringen Verpackungen oder verpackte Waren aus einem Nicht-EU-Staat erstmals in der EU in Verkehr."],["supply","Wir liefern Verpackungen oder Verpackungsmaterial an ein Unternehmen, das daraus eine Verpackung herstellt."],["distribute","Wir verkaufen oder geben Verpackungen oder verpackte Waren innerhalb der Lieferkette weiter."],["fulfilment","Wir lagern, verpacken, adressieren oder versenden Waren für andere Unternehmen, ohne Eigentümer der Waren zu sein."],["none","Keine dieser Tätigkeiten trifft zu."]]},
+{id:"firstAustria",type:"radio",title:"Stellen Sie Verpackungen oder verpackte Waren erstmals in Österreich bereit?",help:"Gemeint ist die erste Bereitstellung im österreichischen Hoheitsgebiet. Das kann auch beim Bezug aus einem anderen EU-Staat der Fall sein.",options:[["yes","Ja"],["no","Nein"],["unsure","Unsicher"]]},
+{id:"endUser",type:"radio",title:"Liefern Sie verpackte Produkte direkt an Endabnehmer?",help:"Endabnehmer können Verbraucherinnen und Verbraucher oder gewerbliche Nutzer sein, die das Produkt nicht in dieser Form weiterverkaufen.",options:[["yes","Ja"],["no","Nein"]]},
+{id:"packaging",type:"checkbox",title:"Welche Verpackungen sind betroffen?",help:"Wählen Sie alle zutreffenden Arten. Die Rollen sind grundsätzlich für jede Verpackungseinheit gesondert zu prüfen.",options:[["sales","Verkaufsverpackungen"],["transport","Transport- oder Umverpackungen"],["ecommerce","Versand- oder E-Commerce-Verpackungen"],["service","Serviceverpackungen wie Becher, Schalen oder Tragetaschen"],["primary","Primärproduktionsverpackungen"],["unknown","Noch unklar"]]},
+{id:"properties",type:"checkbox",title:"Treffen besondere Eigenschaften zu?",help:"Diese Angaben beeinflussen einzelne Produktanforderungen und Fristen.",options:[["food","Die Verpackung kommt mit Lebensmitteln in Kontakt."],["reusable","Die Verpackung wird als wiederverwendbar angeboten."],["takeaway","Wir bieten Speisen oder Getränke zum Mitnehmen an."],["crossBorder","Wir stellen Verpackungen oder verpackte Waren auch in anderen EU-Staaten bereit."],["none","Nichts davon."]]},
+{id:"micro",type:"radio",title:"Ist Ihr Unternehmen ein Kleinstunternehmen?",help:"Als Orientierung: weniger als 10 Beschäftigte und höchstens 2 Mio. Euro Jahresumsatz oder Jahresbilanzsumme. Ausnahmen gelten nur in bestimmten Konstellationen.",options:[["yes","Ja"],["no","Nein"],["unsure","Unsicher"]]}
+];
+const state={step:0,answers:{}};const $=s=>document.querySelector(s);const guide=$("#guide"),results=$("#results"),stage=$("#question-stage"),formError=$("#form-error");
+function setVisible(section){guide.hidden=section!=="guide";results.hidden=section!=="results"}
+function startGuide(){state.step=0;state.answers={};setVisible("guide");renderQuestion();guide.scrollIntoView({behavior:"smooth",block:"start"})}
+function renderQuestion(){const q=questions[state.step],saved=state.answers[q.id]||[],percent=Math.round((state.step+1)/questions.length*100);$("#progress-label").textContent=`Frage ${state.step+1} von ${questions.length}`;$("#progress-percent").textContent=`${percent} %`;$("#progress-bar").style.width=`${percent}%`;$("#back-button").disabled=state.step===0;$("#next-button").textContent=state.step===questions.length-1?"Ergebnis anzeigen":"Weiter";formError.hidden=true;stage.innerHTML=`<fieldset class="question-step"><legend class="sr-only">${q.title}</legend><h3>${q.title}</h3><p class="question-help">${q.help}</p><div class="option-list">${q.options.map(([v,l])=>`<label class="option-card"><input type="${q.type}" name="${q.id}" value="${v}" ${saved.includes(v)?"checked":""}><span>${l}</span></label>`).join("")}</div></fieldset>`;const none=stage.querySelector('input[value="none"]');if(none)stage.querySelectorAll("input").forEach(input=>input.addEventListener("change",()=>{if(input.value==="none"&&input.checked)stage.querySelectorAll("input").forEach(other=>{if(other!==input)other.checked=false});else if(input.checked)none.checked=false}));stage.querySelector("input")?.focus({preventScroll:true})}
+function saveCurrentAnswer(){const q=questions[state.step],checked=[...stage.querySelectorAll("input:checked")].map(input=>input.value);if(!checked.length){formError.hidden=false;stage.querySelector("input")?.focus();return false}state.answers[q.id]=checked;return true}
+function getRoles(){const a=state.answers,acts=new Set(a.activities||[]),roles=[],add=(name,tag,text)=>roles.push({name,tag,text});if(acts.has("ownBrand")||acts.has("custom"))add("Erzeuger","Konformität","Sie stellen Verpackungen unter eigenem Namen oder eigener Marke her oder lassen sie herstellen. Bei individueller Spezifikation kann die Erzeugerrolle auch ohne sichtbares Branding entstehen. Die Kleinstunternehmens-Ausnahme muss gesondert geprüft werden.");if(acts.has("thirdCountry"))add("Importeur","Drittland","Sie bringen Verpackungen aus einem Nicht-EU-Staat auf den Unionsmarkt. Vor dem Inverkehrbringen müssen Sie insbesondere Konformität, Unterlagen und Kennzeichnung des Erzeugers prüfen und eigene Kontaktdaten angeben.");if(acts.has("supply"))add("Lieferant","Datenpflicht","Sie liefern Verpackungen oder Verpackungsmaterial an einen Erzeuger. Sie müssen die technischen Informationen bereitstellen, die der Erzeuger für Konformitätsbewertung und technische Dokumentation benötigt.");if(acts.has("distribute"))add("Vertreiber","Sorgfalt","Sie stellen Verpackungen oder verpackte Waren in der Lieferkette bereit. Prüfen Sie insbesondere Identifikation und Kennzeichnung von Erzeuger und gegebenenfalls Importeur und reagieren Sie auf erkennbare Nichtkonformität.");if((a.firstAustria||[]).includes("yes")||(a.firstAustria||[]).includes("unsure"))add("Hersteller im Sinn der EPR","Österreich","Sie könnten Verpackungen erstmals in Österreich bereitstellen. Damit kommen Registrierung, Systemteilnahme, Meldungen und Finanzierungspflichten nach der erweiterten Herstellerverantwortung in Betracht. Die österreichischen Übergangsregeln sind zusätzlich zu beachten.");if((a.endUser||[]).includes("yes"))add("Letztvertreiber","Endabgabe","Sie liefern verpackte Produkte an Endabnehmer. Neben den allgemeinen Vertreiberpflichten können je nach Verpackung Rücknahme-, Informations-, Mehrweg- oder Wiederbefüllungspflichten relevant sein.");if(acts.has("fulfilment"))add("Fulfilment-Dienstleister","Logistik","Sie erbringen mindestens zwei Fulfilment-Leistungen wie Lagerung, Verpackung, Adressierung oder Versand, ohne Eigentümer der Waren zu sein. Prüfen Sie die besonderen Sorgfalts- und Kooperationspflichten sowie mögliche weitere Rollen.");if(!roles.length)add("Endabnehmer oder Sonderfall","Vertiefung nötig","Aus Ihren Angaben ergibt sich keine typische Marktrolle. Wenn Sie Verpackungen nur verwenden und nicht weiter bereitstellen, können Sie Endabnehmer sein. Prüfen Sie dennoch Abfall-, Rückgabe- und branchenspezifische Pflichten.");return roles}
+function getActions(roles){const names=new Set(roles.map(r=>r.name)),a=state.answers,props=new Set(a.properties||[]),actions=[],add=(title,text)=>actions.push({title,text});add("Verpackungen und Lieferketten erfassen","Legen Sie eine Liste nach Verpackungseinheit, Verpackungsart, Material, Lieferant, Bezugsland, Vertriebsland und Einweg oder Mehrweg an. Ordnen Sie die Rollen für jede Konstellation gesondert zu.");if(names.has("Erzeuger"))add("Konformitätsakte aufbauen","Prüfen Sie die jeweils anwendbaren Anforderungen der Artikel 5 bis 12. Erstellen Sie technische Dokumentation und EU-Konformitätserklärung nach Anhang VII und VIII und sichern Sie Identifikation und Kontaktdaten auf Verpackung oder Begleitunterlagen.");if(names.has("Importeur"))add("Unterlagen vor dem Import absichern","Fordern Sie EU-Konformitätserklärung und technische Dokumentation beim Erzeuger an. Bewahren Sie die Unterlagen fünf Jahre für Einweg- und zehn Jahre für Mehrwegverpackungen auf.");if(names.has("Lieferant"))add("Technische Datenpakete definieren","Vereinbaren Sie mit Kunden, welche Materialdaten, Prüfberichte und Nachweise sie für ihre Konformitätsbewertung benötigen. Stellen Sie die Unterlagen in verständlicher Sprache elektronisch oder auf Papier bereit.");if(names.has("Hersteller im Sinn der EPR"))add("Österreichische EPR-Pflichten prüfen","Klären Sie Registrierung, Teilnahme an Sammel- und Verwertungssystemen, Mengenmeldungen und Kosten nach AWG 2002 und Verpackungsverordnung 2014. Für andere Vertriebsstaaten ist eine eigene Länderprüfung erforderlich.");if(names.has("Vertreiber")||names.has("Letztvertreiber"))add("Wareneingangs- und Freigabeprüfung ergänzen","Dokumentieren Sie, wie Sie Identifikation und Kennzeichnung von Erzeuger und Importeur prüfen und wie Sie bei Verdacht auf Nichtkonformität Verkauf, Information und Korrektur steuern.");if(props.has("food"))add("PFAS-Nachweise für Lebensmittelkontakt prüfen","Seit 12. August 2026 gelten PPWR-Grenzwerte für PFAS in Lebensmittelkontaktverpackungen. Stimmen Sie Prüfstrategie und Nachweise zusätzlich mit dem Lebensmittelkontaktrecht ab.");if(props.has("reusable"))add("Mehrwegkriterien dokumentieren","Belegen Sie, dass die Verpackung für Mehrfachnutzung konzipiert ist und die Kriterien des Artikels 11 erfüllt. Planen Sie die Nachweisführung über Umläufe, Rücknahme und Wiederaufbereitung.");if(props.has("takeaway"))add("Take-away-Prozesse für 2027 und 2028 vorbereiten","Ab 12. Februar 2027 müssen mitgebrachte Behälter ermöglicht werden. Bereiten Sie außerdem das ab 12. Februar 2028 relevante Mehrwegangebot und die Kundeninformation vor.");if(props.has("crossBorder"))add("EPR je Vertriebsland prüfen","Herstellerregister, Bevollmächtigung, Systemteilnahme und Meldungen sind national geprägt. Prüfen Sie jedes Land, in dem Sie Verpackungen erstmals bereitstellen.");if((a.micro||[]).includes("yes")&&(names.has("Erzeuger")||names.has("Hersteller im Sinn der EPR")))add("Kleinstunternehmens-Ausnahme genau abgrenzen","Die Erleichterung greift nicht pauschal. Entscheidend sind unter anderem Sitzstaaten, Auftrag, Branding und die konkrete Verpackung. Dokumentieren Sie die Voraussetzungen und die verbleibenden Pflichten.");return actions}
+function answerLabel(id){const q=questions.find(item=>item.id===id);return(state.answers[id]||[]).map(v=>q.options.find(o=>o[0]===v)?.[1]).filter(Boolean).join("; ")}
+function showResults(){const roles=getRoles(),actions=getActions(roles);$("#result-intro").textContent=`${roles.length} mögliche ${roles.length===1?"Rolle wurde":"Rollen wurden"} erkannt. Das Ergebnis ist ein Prüfauftrag, keine endgültige Einstufung.`;$("#role-results").innerHTML=roles.map(r=>`<article class="role-card"><div class="role-top"><h4>${r.name}</h4><span class="role-tag">${r.tag}</span></div><p>${r.text}</p></article>`).join("");$("#action-results").innerHTML=actions.map(a=>`<li><div><strong>${a.title}</strong><p>${a.text}</p></div></li>`).join("");const items=[["Tätigkeiten","activities"],["Erstmals in Österreich","firstAustria"],["Direkt an Endabnehmer","endUser"],["Verpackungsarten","packaging"],["Besonderheiten","properties"],["Kleinstunternehmen","micro"]];$("#answer-summary").innerHTML=items.map(([l,id])=>`<dt>${l}</dt><dd>${answerLabel(id)}</dd>`).join("");setVisible("results");results.scrollIntoView({behavior:"smooth",block:"start"})}
+$("#start-button").addEventListener("click",startGuide);$("#restart-button").addEventListener("click",startGuide);$("#quit-button").addEventListener("click",()=>{guide.hidden=true;$("#start").scrollIntoView({behavior:"smooth"})});$("#back-button").addEventListener("click",()=>{const q=questions[state.step],checked=[...stage.querySelectorAll("input:checked")].map(input=>input.value);if(checked.length)state.answers[q.id]=checked;state.step=Math.max(0,state.step-1);renderQuestion()});$("#question-form").addEventListener("submit",event=>{event.preventDefault();if(!saveCurrentAnswer())return;if(state.step<questions.length-1){state.step+=1;renderQuestion()}else showResults()});$("#print-button").addEventListener("click",()=>window.print());
 
-startButton.addEventListener("click", () => {
-  introCard.hidden = true;
-  questionnaire.hidden = false;
-
-  questionnaire.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-});
-
-questionForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const selectedAnswer = document.querySelector(
-    'input[name="third-country-import"]:checked'
-  );
-
-  if (!selectedAnswer) {
-    result.hidden = false;
-    result.className = "result-card result-warning";
-    result.innerHTML = `
-      <h3>Bitte wählen Sie eine Antwort aus.</h3>
-      <p>
-        Für die erste Einschätzung benötigen wir eine Antwort
-        auf die angezeigte Frage.
-      </p>
-    `;
-    return;
-  }
-
-  if (selectedAnswer.value === "yes") {
-    result.className = "result-card result-relevant";
-    result.innerHTML = `
-      <h3>Mögliche Rolle: Importeur</h3>
-      <p>
-        Ihr Unternehmen bezieht Verpackungen oder verpackte Waren
-        unmittelbar aus einem Drittstaat. Daher könnte für diesen
-        Vorgang eine Importeurrolle nach der PPWR bestehen.
-      </p>
-      <p>
-        Für eine verlässliche Einordnung müssen die konkrete
-        Lieferkette, die betroffene Verpackung und das erstmalige
-        Bereitstellen auf dem Unionsmarkt geprüft werden.
-      </p>
-    `;
-  }
-
-  if (selectedAnswer.value === "no") {
-    result.className = "result-card result-neutral";
-    result.innerHTML = `
-      <h3>Kein unmittelbarer Hinweis auf eine Importeurrolle</h3>
-      <p>
-        Aus dieser Antwort ergibt sich zunächst kein Hinweis auf
-        eine Importeurrolle aufgrund eines unmittelbaren Bezugs
-        aus einem Drittstaat.
-      </p>
-      <p>
-        Ihr Unternehmen kann dennoch andere Rollen nach der PPWR
-        erfüllen. Diese werden in weiteren Fragen geprüft.
-      </p>
-    `;
-  }
-
-  if (selectedAnswer.value === "unsure") {
-    result.className = "result-card result-warning";
-    result.innerHTML = `
-      <h3>Weitere Prüfung erforderlich</h3>
-      <p>
-        Prüfen Sie, wo Ihr unmittelbarer Vertragspartner ansässig
-        ist und aus welchem Staat die Waren in die Europäische Union
-        gelangen.
-      </p>
-      <p>
-        Die konkrete Rollenzuordnung sollte anhand der Lieferkette
-        und der Vertragsbeziehungen geprüft werden.
-      </p>
-    `;
-  }
-
-  result.hidden = false;
-
-  result.scrollIntoView({
-    behavior: "smooth",
-    block: "nearest"
-  });
-});
