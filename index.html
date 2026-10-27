@@ -52,14 +52,40 @@
     </section>
 
     <section id="questionnaire" class="question-card" hidden>
-      <p class="progress">Frage 1</p>
+  <p class="progress">Frage 1 von 1</p>
 
-      <h2>Willkommen im PPWR-Ratgeber</h2>
+  <h2>Bezug aus einem Drittstaat</h2>
 
-      <p>
-        Der Fragenkatalog wird im nächsten Entwicklungsschritt ergänzt.
-      </p>
-    </section>
+  <form id="question-form">
+    <fieldset>
+      <legend>
+        Bezieht Ihr Unternehmen Verpackungen oder verpackte Waren
+        unmittelbar aus einem Staat außerhalb der Europäischen Union?
+      </legend>
+
+      <label>
+        <input type="radio" name="third-country-import" value="yes">
+        Ja
+      </label>
+
+      <label>
+        <input type="radio" name="third-country-import" value="no">
+        Nein
+      </label>
+
+      <label>
+        <input type="radio" name="third-country-import" value="unsure">
+        Ich bin nicht sicher
+      </label>
+
+      <button type="submit">
+        Antwort bestätigen
+      </button>
+    </fieldset>
+  </form>
+
+  <div id="result" class="result-card" hidden></div>
+</section>
   </main>
 
   <footer class="page-footer">
