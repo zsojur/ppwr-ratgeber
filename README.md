@@ -47,4 +47,9 @@ Der Ratgeber dient der unverbindlichen Erstinformation. Er ersetzt keine rechtli
 
 ## Projektstatus
 
-Das Projekt befindet sich in der Konzeptionsphase. Die Entscheidungslogik und die rechtlichen Inhalte werden schrittweise entwickelt und geprüft.
+Der interaktive Rollencheck ist umgesetzt. Er ordnet anhand von sechs Fragen mögliche Rollen zu, erstellt eine priorisierte Maßnahmenliste und verweist auf aktuelle amtliche Quellen. Die Anwendung läuft ohne Build-Schritt direkt im Browser.
+
+## Lokale Nutzung
+
+`index.html` im Browser öffnen oder den Ordner über einen lokalen Webserver bereitstellen.
+

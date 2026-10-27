@@ -3,71 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>PPWR-Ratgeber</title>
-
-  <meta
-    name="description"
-    content="Interaktiver PPWR-Ratgeber für österreichische Unternehmen"
-  >
-
+  <meta name="description" content="Interaktiver PPWR-Rollencheck für österreichische Unternehmen mit Pflichten, Fristen und nächsten Schritten.">
+  <meta name="theme-color" content="#e20613">
+  <title>PPWR-Ratgeber für österreichische Unternehmen</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <header class="page-header">
-    <div class="container">
-      <p class="eyebrow">Orientierung für österreichische Unternehmen</p>
-      <h1>PPWR-Ratgeber</h1>
-      <p class="subtitle">
-        Finden Sie anhand einfacher Fragen heraus, welche Rollen und
-        Verpflichtungen nach der EU-Verpackungsverordnung für Ihr
-        Unternehmen relevant sein könnten.
-      </p>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#start" aria-label="PPWR-Ratgeber Startseite"><span class="brand-mark" aria-hidden="true">P</span><span>PPWR-Ratgeber</span></a>
+      <a class="topbar-link" href="#fristen">Fristen im Überblick</a>
     </div>
   </header>
 
-  <main class="container">
-    <section class="intro-card">
-      <h2>Was bietet dieser Ratgeber?</h2>
-
-      <ul>
-        <li>Erste Einschätzung Ihrer möglichen PPWR-Rollen</li>
-        <li>Verständliche Informationen zu den jeweiligen Pflichten</li>
-        <li>Praxisorientierte Handlungsempfehlungen</li>
-        <li>Weiterführende Informationen der Wirtschaftskammer</li>
-        <li>Zusammenfassung Ihrer Angaben und Ergebnisse</li>
-      </ul>
-
-      <div class="notice">
-        <strong>Wichtiger Hinweis:</strong>
-        Dieser Ratgeber dient der unverbindlichen Erstinformation.
-        Er ersetzt keine rechtliche Beratung und keine Prüfung des
-        konkreten Einzelfalls.
+  <main id="main">
+    <section class="hero" id="start">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Orientierung für Unternehmen in Österreich</p>
+          <h1>Welche PPWR-Rollen hat Ihr Unternehmen?</h1>
+          <p class="lede">Beantworten Sie sechs kurze Fragen. Sie erhalten eine erste Einordnung Ihrer möglichen Rollen, die wichtigsten Pflichten und konkrete nächste Schritte.</p>
+          <div class="hero-actions"><button class="button button-primary" id="start-button" type="button">Rollencheck starten</button><span class="time-note">Dauer etwa 3 Minuten</span></div>
+          <p class="updated">Rechtsstand 27. Oktober 2026 · Fokus Österreich</p>
+        </div>
+        <aside class="hero-panel" aria-label="Was Sie erhalten">
+          <p class="panel-kicker">Ihr Ergebnis</p>
+          <ul class="benefit-list">
+            <li><span>01</span>Mögliche Rollen in der Lieferkette</li><li><span>02</span>Pflichten nach Dringlichkeit</li>
+            <li><span>03</span>Hinweise zu Österreich und EPR</li><li><span>04</span>Druckbare Zusammenfassung</li>
+          </ul>
+        </aside>
       </div>
-
-      <button id="start-button" type="button">
-        Ratgeber starten
-      </button>
     </section>
 
-    <section id="questionnaire" class="question-card" hidden>
-      <p class="progress">Frage 1</p>
+    <section class="context-strip" aria-label="Wichtiger Hinweis"><div class="shell context-grid"><strong>Seit 12. August 2026 anwendbar</strong><p>Die PPWR gilt unmittelbar. Viele Detailanforderungen starten jedoch gestaffelt und hängen noch von Folgerechtsakten oder Standards ab.</p></div></section>
 
-      <h2>Willkommen im PPWR-Ratgeber</h2>
+    <section class="guide shell" id="guide" hidden aria-labelledby="guide-title">
+      <div class="guide-header"><div><p class="eyebrow red">Interaktiver Rollencheck</p><h2 id="guide-title">Ihre Tätigkeit entscheidet</h2></div><button class="text-button" id="quit-button" type="button">Zur Übersicht</button></div>
+      <div class="progress-wrap" aria-live="polite"><div class="progress-meta"><span id="progress-label">Frage 1 von 6</span><span id="progress-percent">17 %</span></div><div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div></div>
+      <form id="question-form" novalidate>
+        <div id="question-stage"></div>
+        <p class="form-error" id="form-error" role="alert" hidden>Bitte wählen Sie mindestens eine Antwort.</p>
+        <div class="form-actions"><button class="button button-secondary" id="back-button" type="button">Zurück</button><button class="button button-primary" id="next-button" type="submit">Weiter</button></div>
+      </form>
+    </section>
 
-      <p>
-        Der Fragenkatalog wird im nächsten Entwicklungsschritt ergänzt.
-      </p>
+    <section class="results shell" id="results" hidden aria-labelledby="results-title">
+      <div class="result-hero">
+        <p class="eyebrow">Ihre erste Einordnung</p><h2 id="results-title">Diese Rollen sollten Sie prüfen</h2><p id="result-intro"></p>
+        <div class="result-actions"><button class="button button-light" id="print-button" type="button">Ergebnis drucken</button><button class="button button-outline-light" id="restart-button" type="button">Neu starten</button></div>
+      </div>
+      <div class="result-layout">
+        <div>
+          <section aria-labelledby="roles-title"><div class="section-heading compact"><p class="eyebrow red">Rollen</p><h3 id="roles-title">Mögliche Einordnung</h3></div><div class="role-grid" id="role-results"></div></section>
+          <section class="action-section" aria-labelledby="actions-title"><div class="section-heading compact"><p class="eyebrow red">Prioritäten</p><h3 id="actions-title">Ihre nächsten Schritte</h3></div><ol class="action-list" id="action-results"></ol></section>
+        </div>
+        <aside class="result-aside">
+          <div class="answer-card"><h3>Ihre Angaben</h3><dl id="answer-summary"></dl></div>
+          <div class="legal-card"><strong>Keine abschließende Rechtsprüfung</strong><p>Das Ergebnis ist eine unverbindliche Erstinformation. Rollen können gleichzeitig bestehen und für jede Verpackung, Lieferkette und jedes Land anders ausfallen.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="timeline-section" id="fristen">
+      <div class="shell">
+        <div class="section-heading"><p class="eyebrow red">Zeitplan</p><h2>Die wichtigsten Fristen für die Planung</h2><p>Die Übersicht nennt zentrale Meilensteine. Ob eine Pflicht Ihr Unternehmen trifft, hängt von Rolle und Verpackungsart ab.</p></div>
+        <div class="timeline">
+          <article class="timeline-item is-current"><time datetime="2026-08-12">12. August 2026</time><h3>Grundpflichten gelten</h3><p>Rollen, Pflichten der Wirtschaftsakteure, Konformitätsverfahren für bereits anwendbare Anforderungen, Stoffbeschränkungen und Kriterien für Mehrwegverpackungen.</p></article>
+          <article class="timeline-item"><time datetime="2027-02-12">12. Februar 2027</time><h3>Take-away mit eigenen Behältern</h3><p>Anbieter im Take-away-Bereich müssen Kundinnen und Kunden ermöglichen, eigene Behälter für Speisen und Getränke mitzubringen.</p></article>
+          <article class="timeline-item"><time datetime="2028-02-12">12. Februar 2028</time><h3>Leerraum und Mehrwegangebot</h3><p>Neue Vorgaben zur Minimierung von Leerraum in Verkaufsverpackungen sowie zum Mehrwegangebot im Take-away-Bereich werden relevant.</p></article>
+          <article class="timeline-item"><time datetime="2028-08-12">Frühestens 12. August 2028</time><h3>Harmonisierte Kennzeichnung</h3><p>Die unionsweite Materialkennzeichnung startet abhängig vom Erlass der vorgesehenen Durchführungsrechtsakte.</p></article>
+          <article class="timeline-item"><time datetime="2030-01-01">Ab 1. Jänner 2030</time><h3>Weitere Design- und Kreislaufpflichten</h3><p>Unter anderem werden Anforderungen an Recyclingfähigkeit, Rezyklatanteile, Verpackungsminimierung, bestimmte Verbote und Wiederverwendungsziele schrittweise wirksam.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sources-section">
+      <div class="shell sources-grid">
+        <div class="section-heading"><p class="eyebrow red">Vertiefung</p><h2>Geprüfte Grundlagen</h2><p>Die Einordnung stützt sich auf den Verordnungstext, die Leitlinie und FAQ der Europäischen Kommission sowie aktuelle österreichische Informationen.</p></div>
+        <div class="source-links">
+          <a href="https://eur-lex.europa.eu/eli/reg/2025/40/oj" target="_blank" rel="noopener">Verordnung EU 2025 40 auf EUR-Lex <span>↗</span></a>
+          <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52026XC03084" target="_blank" rel="noopener">Leitlinie der Europäischen Kommission <span>↗</span></a>
+          <a href="https://environment.ec.europa.eu/publications/faq-packaging-and-packaging-waste-regulation-ppwr_en" target="_blank" rel="noopener">FAQ der Europäischen Kommission <span>↗</span></a>
+          <a href="https://www.bmluk.gv.at/themen/abfall-und-kreislaufwirtschaft/abfallsammlung-behandlung-und-verbringung/verpackungen/merkblatt-verpackungsvo.html" target="_blank" rel="noopener">Merkblatt des Bundesministeriums <span>↗</span></a>
+          <a href="https://www.wko.at/abfall/eu-verpackungsverordnung-ppwr" target="_blank" rel="noopener">PPWR-Informationen der WKO <span>↗</span></a>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="page-footer">
-    <div class="container">
-      <p>Prototyp für einen interaktiven PPWR-Ratgeber</p>
-    </div>
-  </footer>
-
+  <footer class="page-footer"><div class="shell footer-grid"><div><strong>PPWR-Ratgeber</strong><p>Unverbindliche Erstinformation für österreichische Unternehmen</p></div><p>Stand 27. Oktober 2026</p></div></footer>
   <script src="app.js"></script>
 </body>
 </html>
+
