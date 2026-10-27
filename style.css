@@ -165,3 +165,83 @@ button:focus-visible {
     width: 100%;
   }
 }
+fieldset {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  margin-bottom: 20px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+label {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 15px 16px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+label:hover {
+  border-color: var(--primary-color);
+  background-color: var(--accent-color);
+}
+
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--primary-color);
+}
+
+fieldset button {
+  margin-top: 12px;
+  justify-self: start;
+}
+
+.result-card {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid var(--border-color);
+  border-left-width: 6px;
+  border-radius: 10px;
+}
+
+.result-card h3 {
+  margin-top: 0;
+}
+
+.result-card p:last-child {
+  margin-bottom: 0;
+}
+
+.result-relevant {
+  background-color: #e7f4ed;
+  border-left-color: var(--primary-color);
+}
+
+.result-neutral {
+  background-color: #edf4f7;
+  border-left-color: #39758c;
+}
+
+.result-warning {
+  background-color: var(--notice-color);
+  border-left-color: var(--notice-border);
+}
+
+@media (max-width: 600px) {
+  fieldset button {
+    width: 100%;
+  }
+}
