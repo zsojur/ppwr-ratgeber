@@ -47,7 +47,7 @@ Der Ratgeber dient der unverbindlichen Erstinformation. Er ersetzt keine rechtli
 
 ## Projektstatus
 
-Der interaktive Rollencheck ist umgesetzt. Je nach Lieferweg führt er durch bis zu elf Fragen, ordnet mögliche PPWR-Rollen zu und erstellt eine priorisierte Maßnahmenliste. Beim Versand in andere EU-Länder berücksichtigt er Niederlassung, Vertriebsmodell und Zielländer und verlinkt die passenden Kapitel des WKO-Länderguides. Jede ermittelte Rolle führt außerdem direkt zur entsprechenden WKO-Detailseite. Die Anwendung läuft ohne Build-Schritt direkt im Browser.
+Der interaktive Rollencheck ist umgesetzt. Je nach Lieferweg führt er durch bis zu elf leicht verständliche Fragen mit Beispielen und Hinweisen, ordnet mögliche PPWR-Rollen zu und erstellt eine priorisierte Maßnahmenliste. Beim Versand in andere EU-Länder berücksichtigt er Niederlassung, Vertriebsmodell und Zielländer und verlinkt im Ergebnis die passenden Kapitel des WKO-Länderguides. Jede ermittelte Rolle führt außerdem direkt zur entsprechenden WKO-Detailseite. Die Anwendung läuft ohne Build-Schritt direkt im Browser.
 
 ## Lokale Nutzung
 

@@ -19,54 +19,59 @@ const countries = [
 const questions = {
   activity: {
     id: "activity", type: "checkbox",
-    title: "Welche Tätigkeiten übt Ihr Unternehmen aus?",
-    help: "Mehrfachauswahl möglich. Wählen Sie nur Tätigkeiten, die sich auf Verpackungen oder verpackte Waren beziehen.",
+    title: "Was macht Ihr Betrieb mit Verpackungen oder verpackten Waren?",
+    help: "Wählen Sie alles aus, was regelmäßig vorkommt. Mehrere Antworten sind möglich.",
+    hint: "Denken Sie auch an Versandkartons, Folien, Paletten und andere Transportverpackungen.",
     options: [
-      ["brandOwner", "Wir stellen Verpackungen oder verpackte Produkte unter eigener Marke her oder lassen sie herstellen."],
-      ["physicalProducer", "Wir fertigen oder konfektionieren Verpackungen für uns oder für andere Unternehmen."],
-      ["packFiller", "Wir verpacken unsere Waren selbst in zugekaufte Verpackungen."],
-      ["nonEuImport", "Wir beziehen Verpackungen oder verpackte Waren unmittelbar aus einem Nicht-EU-Staat, einschließlich EWR."],
-      ["supply", "Wir liefern Verpackungen oder Verpackungsmaterial an andere Unternehmen."],
-      ["resell", "Wir verkaufen oder geben Verpackungen oder verpackte Waren unverändert weiter."],
-      ["fulfilment", "Wir lagern, verpacken, adressieren oder versenden Waren für andere, ohne Eigentümer der Waren zu sein."],
-      ["representative", "Wir wurden schriftlich als Bevollmächtigter eines anderen Unternehmens bestellt."],
+      ["brandOwner", "Auf der Verpackung oder Ware steht unser Firmenname oder unsere Marke."],
+      ["physicalProducer", "Wir stellen leere Verpackungen her oder bearbeiten sie."],
+      ["packFiller", "Wir füllen oder verpacken unsere eigenen Waren selbst."],
+      ["nonEuImport", "Wir kaufen Verpackungen oder verpackte Waren direkt außerhalb der EU ein."],
+      ["supply", "Wir liefern leere Verpackungen oder Verpackungsmaterial an andere Betriebe."],
+      ["resell", "Wir handeln bereits verpackte Waren weiter, ohne die Verpackung zu verändern."],
+      ["fulfilment", "Wir lagern, verpacken oder versenden Waren im Auftrag anderer Betriebe."],
+      ["representative", "Wir übernehmen schriftlich PPWR- oder Verpackungspflichten für einen anderen Betrieb."],
       ["none", "Keine dieser Tätigkeiten trifft zu."]
     ]
   },
   packagingSource: {
     id: "packagingSource", type: "radio",
-    title: "Wie entsteht oder beschaffen Sie die betroffene Verpackung?",
-    help: "Diese Abgrenzung ist besonders wichtig für die Erzeugerrolle.",
+    title: "Wer bestimmt, wie die Verpackung aussieht?",
+    help: "Wählen Sie die Antwort, die für den größten Teil Ihrer Verpackungen passt.",
+    hint: "Wenn es je nach Verpackung unterschiedlich ist, wählen Sie „Noch unklar“ und prüfen Sie die Fälle später einzeln.",
     options: [
-      ["ownBrand", "Sie trägt unsere Marke oder wird nach unseren konkreten Vorgaben individuell hergestellt."],
-      ["standardB2B", "Wir kaufen eine fertige Standardverpackung, die für gewerbliches Verpacken bestimmt ist."],
-      ["customerBrand", "Wir fertigen nach Vorgaben und unter der Marke unseres Kunden."],
-      ["retailMaterial", "Wir verwenden Material aus dem Einzelhandel, das ursprünglich für den Privatgebrauch bestimmt war."],
-      ["reused", "Wir verwenden bereits eingesetzte Verpackungen oder gebrauchtes Verpackungsmaterial erneut."],
-      ["unknown", "Das ist noch unklar oder unterscheidet sich je Verpackung."]
+      ["ownBrand", "Wir bestimmen Form oder Gestaltung; unsere Marke oder unser Name steht darauf."],
+      ["standardB2B", "Wir kaufen eine fertige Standardverpackung für Betriebe, zum Beispiel neutrale Kartons."],
+      ["customerBrand", "Unser Kunde gibt Gestaltung und Marke vor; wir stellen für ihn her."],
+      ["retailMaterial", "Wir verwenden Material aus dem Einzelhandel, zum Beispiel Haushaltsfolie oder Geschenkpapier."],
+      ["reused", "Wir verwenden eine bereits gebrauchte Verpackung noch einmal."],
+      ["unknown", "Noch unklar oder je nach Verpackung unterschiedlich."]
     ]
   },
   customers: {
     id: "customers", type: "checkbox",
-    title: "An wen liefern Sie verpackte Produkte?",
-    help: "Endabnehmer stellen das Produkt in der gelieferten Form nicht erneut auf dem Markt bereit.",
+    title: "An wen liefern Sie die verpackte Ware?",
+    help: "Mehrere Antworten sind möglich.",
+    hint: "Ein Endkunde verwendet die Ware selbst. Ein Händler oder Verarbeiter verkauft oder verarbeitet sie weiter.",
     options: [
-      ["consumers", "An Verbraucherinnen und Verbraucher."],
-      ["businessEnd", "An gewerbliche Endabnehmer, die das Produkt selbst nutzen."],
-      ["resellers", "An Händler, Verarbeiter oder andere Unternehmen, die weitervertreiben."],
+      ["consumers", "An private Kundinnen und Kunden."],
+      ["businessEnd", "An Betriebe, die die Ware selbst verwenden."],
+      ["resellers", "An Händler oder Verarbeiter, die die Ware weiterverkaufen oder weiterverarbeiten."],
       ["none", "Wir liefern keine verpackten Produkte."]
     ]
   },
   firstAustria: {
     id: "firstAustria", type: "radio",
-    title: "Stellen Sie Verpackungen oder verpackte Waren erstmals in Österreich bereit?",
-    help: "Das kann auch beim Bezug aus einem anderen EU-Staat oder beim Auspacken für den weiteren Vertrieb der Fall sein.",
+    title: "Sind Sie der erste Betrieb, der diese Verpackung in Österreich verkauft oder weitergibt?",
+    help: "Es geht um die erste Bereitstellung in Österreich – nicht darum, wer die Verpackung hergestellt hat.",
+    hint: "Beispiel: Sie kaufen verpackte Ware in Deutschland und verkaufen sie erstmals in Österreich. Dann lautet die Antwort in der Regel „Ja“.",
     options: [["yes", "Ja"], ["no", "Nein"], ["unsure", "Unsicher"]]
   },
   destinations: {
     id: "destinations", type: "checkbox",
-    title: "Versenden oder liefern Sie auch außerhalb Österreichs?",
-    help: "Mehrfachauswahl möglich. Für jedes Zielland können eigene EPR-, Register- und Meldepflichten gelten.",
+    title: "Wohin liefern oder versenden Sie?",
+    help: "Wählen Sie alle Gebiete aus, in die Sie derzeit oder konkret geplant liefern.",
+    hint: "Bei Lieferungen ins Ausland können zusätzliche Registrierung, Meldungen und Verpackungsentgelte anfallen.",
     options: [
       ["eu", "Ja, in andere EU-Mitgliedstaaten."],
       ["eea", "Ja, nach Island, Liechtenstein oder Norwegen."],
@@ -76,51 +81,59 @@ const questions = {
   },
   crossBorderModel: {
     id: "crossBorderModel", type: "checkbox",
-    title: "Wie gelangen die Waren in andere EU-Mitgliedstaaten?",
-    help: "Die direkte Lieferung an Endabnehmer ist für die Herstellerrolle und die EPR-Bevollmächtigung besonders relevant.",
+    title: "An wen liefern Sie in den anderen EU-Ländern?",
+    help: "Mehrere Antworten sind möglich.",
+    hint: "Direkt bedeutet: Die Ware geht von Ihnen an den Endkunden, ohne dass ein Händler im Zielland dazwischensteht.",
     options: [
-      ["directEnd", "Direkt aus Österreich an Verbraucher oder gewerbliche Endabnehmer."],
-      ["foreignReseller", "An einen Händler oder Verarbeiter im Zielland, der weitervertreibt."],
-      ["marketplace", "Über einen Online-Marktplatz oder ein ausländisches Fulfilment-Lager."],
-      ["mixed", "Mehrere dieser Vertriebswege."],
+      ["directEnd", "Direkt an private oder gewerbliche Endkunden."],
+      ["foreignReseller", "An einen Händler oder Verarbeiter im Zielland."],
+      ["marketplace", "Über einen Online-Marktplatz oder ein Lager im Zielland."],
+      ["mixed", "Auf mehreren dieser Wege."],
       ["unsure", "Noch unklar."]
     ]
   },
   countries: {
     id: "countries", type: "countries",
-    title: "In welche EU-Mitgliedstaaten liefern Sie?",
-    help: "Wählen Sie alle aktuellen oder konkret geplanten Zielländer. Österreich ist nicht aufgeführt, da es Ihr Ausgangsland ist."
+    title: "In welche EU-Länder liefern Sie?",
+    help: "Wählen Sie alle aktuellen oder konkret geplanten Zielländer. Österreich ist nicht aufgeführt.",
+    hint: "Im Ergebnis erhalten Sie für jedes gewählte Land einen direkten Link zu den aktuellen Länderinformationen."
   },
   foreignEstablishment: {
     id: "foreignEstablishment", type: "radio",
-    title: "Hat Ihr Unternehmen eine Niederlassung in allen ausgewählten Zielländern?",
-    help: "Ohne Niederlassung kann bei direkter Bereitstellung eine EPR-Bevollmächtigung im jeweiligen Mitgliedstaat erforderlich sein.",
-    options: [["yes", "Ja, in allen."], ["no", "Nein, in keinem."], ["mixed", "Nur in einzelnen Zielländern."], ["unsure", "Unsicher."]]
+    title: "Hat Ihr Betrieb in diesen Ländern eine eigene Niederlassung?",
+    help: "Gemeint ist eine feste eigene Niederlassung – nicht ein Paketdienst, Händler oder externer Lageranbieter.",
+    hint: "Ohne eigene Niederlassung kann eine bevollmächtigte Person oder Firma im Zielland nötig sein.",
+    options: [["yes", "Ja, in allen ausgewählten Ländern."], ["no", "Nein."], ["mixed", "Nur in einigen Ländern."], ["unsure", "Unsicher."]]
   },
   packaging: {
     id: "packaging", type: "checkbox",
-    title: "Welche Verpackungsarten sind betroffen?",
-    help: "Prüfen Sie Rollen und Pflichten grundsätzlich für jede Verpackungseinheit gesondert.",
+    title: "Welche Verpackungen verwenden oder verkaufen Sie?",
+    help: "Wählen Sie alles aus, was vorkommt. Mehrere Teile einer Lieferung können getrennte Verpackungen sein.",
+    hint: "Beispiel: Produktkarton, Versandkarton, Füllmaterial und Palette sind getrennt zu betrachten.",
     options: [
-      ["sales", "Verkaufsverpackungen"], ["transport", "Transport- oder Umverpackungen"],
-      ["ecommerce", "Versand- oder E-Commerce-Verpackungen"], ["service", "Serviceverpackungen"],
-      ["primary", "Primärproduktionsverpackungen"], ["unknown", "Noch unklar"]
+      ["sales", "Verpackung direkt am Produkt, zum Beispiel Flasche, Dose oder Produktkarton"],
+      ["transport", "Verpackung für Transport und Lagerung, zum Beispiel Palette oder Folie"],
+      ["ecommerce", "Versandverpackung, zum Beispiel Paketkarton und Füllmaterial"],
+      ["service", "Verpackung bei der Übergabe, zum Beispiel Becher, Schale oder Tragetasche"],
+      ["primary", "Verpackung für unverarbeitete Erzeugnisse aus Landwirtschaft oder Fischerei"],
+      ["unknown", "Noch unklar"]
     ]
   },
   properties: {
     id: "properties", type: "checkbox",
-    title: "Welche besonderen Eigenschaften treffen zu?",
-    help: "Diese Angaben beeinflussen einzelne Produktanforderungen und Fristen.",
+    title: "Trifft etwas davon auf Ihre Verpackungen zu?",
+    help: "Diese Angaben können zusätzliche Anforderungen auslösen.",
     options: [
-      ["food", "Lebensmittelkontakt"], ["reusable", "Als wiederverwendbar angeboten"],
-      ["takeaway", "Take-away-Speisen oder -Getränke"], ["plastic", "Kunststoffverpackung"],
+      ["food", "Die Verpackung berührt Lebensmittel."], ["reusable", "Die Verpackung soll mehrfach verwendet werden."],
+      ["takeaway", "Wir geben Speisen oder Getränke zum Mitnehmen aus."], ["plastic", "Die Verpackung besteht ganz oder teilweise aus Kunststoff."],
       ["none", "Nichts davon"]
     ]
   },
   micro: {
     id: "micro", type: "radio",
-    title: "Ist Ihr Unternehmen ein Kleinstunternehmen?",
-    help: "Orientierung: weniger als 10 Beschäftigte und höchstens 2 Mio. Euro Jahresumsatz oder Jahresbilanzsumme. Ausnahmen gelten nur in bestimmten Konstellationen.",
+    title: "Hat Ihr Betrieb weniger als 10 Beschäftigte?",
+    help: "Für ein Kleinstunternehmen muss zusätzlich der Jahresumsatz oder die Jahresbilanzsumme höchstens 2 Mio. Euro betragen.",
+    hint: "Auch für Kleinstunternehmen gelten viele Pflichten weiter. Die Größe wird nur für einzelne Ausnahmen abgefragt.",
     options: [["yes", "Ja"], ["no", "Nein"], ["unsure", "Unsicher"]]
   }
 };
@@ -181,7 +194,8 @@ function renderQuestion() {
       <label class="option-card"><input type="${question.type}" name="${question.id}" value="${value}" ${saved.includes(value) ? "checked" : ""}><span>${label}</span></label>
     `).join("")}</div>`;
 
-  stage.innerHTML = `<fieldset class="question-step"><legend class="sr-only">${question.title}</legend><h3>${question.title}</h3><p class="question-help">${question.help}</p>${choices}</fieldset>`;
+  const hint = question.hint ? `<aside class="question-hint"><strong>Hinweis</strong><span>${question.hint}</span></aside>` : "";
+  stage.innerHTML = `<fieldset class="question-step"><legend class="sr-only">${question.title}</legend><h3>${question.title}</h3><p class="question-help">${question.help}</p>${hint}${choices}</fieldset>`;
   const noneInput = stage.querySelector('input[value="none"]');
   if (noneInput) {
     stage.querySelectorAll("input").forEach((input) => input.addEventListener("change", () => {
