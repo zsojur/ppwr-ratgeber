@@ -107,16 +107,17 @@ const questions = {
   },
   packaging: {
     id: "packaging", type: "checkbox",
-    title: "Welche Verpackungen verwenden oder verkaufen Sie?",
-    help: "Wählen Sie alles aus, was vorkommt. Mehrere Teile einer Lieferung können getrennte Verpackungen sein.",
-    hint: "Beispiel: Produktkarton, Versandkarton, Füllmaterial und Palette sind getrennt zu betrachten.",
+    title: "Welche Verpackungsarten sind betroffen?",
+    help: "Wählen Sie alle Verpackungsarten aus, die Ihr Betrieb verwendet, befüllt, herstellt, importiert oder weiterverkauft.",
+    purpose: "Die PPWR beurteilt nicht nur das Produkt, sondern jede einzelne Verpackung. Für Produktkarton, Versandkarton, Füllmaterial und Palette können deshalb unterschiedliche Rollen, Nachweise und spätere Vorgaben gelten.",
+    hint: "Betrachten Sie jedes Verpackungsteil einzeln. Wenn eine Lieferung aus Karton, Folie und Palette besteht, können mehrere Antworten richtig sein.",
     options: [
-      ["sales", "Verpackung direkt am Produkt, zum Beispiel Flasche, Dose oder Produktkarton"],
-      ["transport", "Verpackung für Transport und Lagerung, zum Beispiel Palette oder Folie"],
-      ["ecommerce", "Versandverpackung, zum Beispiel Paketkarton und Füllmaterial"],
-      ["service", "Verpackung bei der Übergabe, zum Beispiel Becher, Schale oder Tragetasche"],
-      ["primary", "Verpackung für unverarbeitete Erzeugnisse aus Landwirtschaft oder Fischerei"],
-      ["unknown", "Noch unklar"]
+      ["sales", "Verkaufsverpackung", "Bleibt beim Produkt bis zum Kunden, zum Beispiel Flasche, Dose, Tube oder Produktkarton."],
+      ["transport", "Transport- oder Umverpackung", "Schützt oder bündelt Waren bei Lagerung und Transport, zum Beispiel Palette, Stretchfolie, Kiste oder Umkarton."],
+      ["ecommerce", "Versand- oder E-Commerce-Verpackung", "Wird für den Versand an den Kunden verwendet, zum Beispiel Paketkarton, Versandtasche und Füllmaterial."],
+      ["service", "Serviceverpackung", "Wird erst bei der Übergabe an den Kunden befüllt, zum Beispiel Coffee-to-go-Becher, Imbissschale oder Tragetasche."],
+      ["primary", "Primärproduktionsverpackung", "Verpackt unverarbeitete Erzeugnisse aus Landwirtschaft, Tierhaltung oder Fischerei, zum Beispiel Obststeigen oder Eierkartons im Erzeugerbetrieb."],
+      ["unknown", "Noch unklar", "Wählen Sie diese Antwort, wenn Sie die Verpackungsart noch nicht sicher zuordnen können."]
     ]
   },
   properties: {
@@ -190,12 +191,13 @@ function renderQuestion() {
   formError.hidden = true;
 
   const choices = question.type === "countries" ? renderCountries(saved) : `
-    <div class="option-list">${question.options.map(([value, label]) => `
-      <label class="option-card"><input type="${question.type}" name="${question.id}" value="${value}" ${saved.includes(value) ? "checked" : ""}><span>${label}</span></label>
+    <div class="option-list">${question.options.map(([value, label, detail]) => `
+      <label class="option-card"><input type="${question.type}" name="${question.id}" value="${value}" ${saved.includes(value) ? "checked" : ""}><span><b>${label}</b>${detail ? `<small>${detail}</small>` : ""}</span></label>
     `).join("")}</div>`;
 
+  const purpose = question.purpose ? `<aside class="question-purpose"><strong>Warum wir das fragen</strong><p>${question.purpose}</p></aside>` : "";
   const hint = question.hint ? `<aside class="question-hint"><strong>Hinweis</strong><span>${question.hint}</span></aside>` : "";
-  stage.innerHTML = `<fieldset class="question-step"><legend class="sr-only">${question.title}</legend><h3>${question.title}</h3><p class="question-help">${question.help}</p>${hint}${choices}</fieldset>`;
+  stage.innerHTML = `<fieldset class="question-step"><legend class="sr-only">${question.title}</legend><h3>${question.title}</h3><p class="question-help">${question.help}</p>${purpose}${hint}${choices}</fieldset>`;
   const noneInput = stage.querySelector('input[value="none"]');
   if (noneInput) {
     stage.querySelectorAll("input").forEach((input) => input.addEventListener("change", () => {
