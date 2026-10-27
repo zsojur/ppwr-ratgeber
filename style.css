@@ -1,0 +1,167 @@
+:root {
+  --primary-color: #145c43;
+  --primary-dark: #0d4431;
+  --accent-color: #dcefe6;
+  --background-color: #f5f7f6;
+  --card-color: #ffffff;
+  --text-color: #1f2933;
+  --muted-color: #5f6b75;
+  --border-color: #d9e1dd;
+  --notice-color: #fff7dc;
+  --notice-border: #e3b341;
+  --shadow: 0 12px 30px rgba(20, 92, 67, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+.container {
+  width: min(100% - 32px, 900px);
+  margin-inline: auto;
+}
+
+.page-header {
+  padding: 64px 0 56px;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary-dark),
+      var(--primary-color)
+    );
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #cce8db;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.3rem, 7vw, 4.5rem);
+  line-height: 1.05;
+}
+
+.subtitle {
+  max-width: 720px;
+  margin: 24px 0 0;
+  font-size: 1.15rem;
+  color: #eef8f3;
+}
+
+main {
+  padding: 40px 0 64px;
+}
+
+.intro-card,
+.question-card {
+  padding: 32px;
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.question-card {
+  margin-top: 24px;
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--primary-dark);
+}
+
+ul {
+  padding-left: 24px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.notice {
+  margin: 28px 0;
+  padding: 18px;
+  background-color: var(--notice-color);
+  border-left: 5px solid var(--notice-border);
+  border-radius: 8px;
+}
+
+button {
+  display: inline-block;
+  padding: 14px 24px;
+  font: inherit;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+button:focus-visible {
+  outline: 3px solid #8cc9ae;
+  outline-offset: 3px;
+}
+
+.progress {
+  margin-top: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.page-footer {
+  padding: 24px 0;
+  color: var(--muted-color);
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+}
+
+[hidden] {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .page-header {
+    padding: 44px 0 40px;
+  }
+
+  main {
+    padding-top: 24px;
+  }
+
+  .intro-card,
+  .question-card {
+    padding: 22px;
+    border-radius: 14px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
