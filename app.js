@@ -23,15 +23,15 @@ const questions = {
     help: "Wählen Sie alles aus, was regelmäßig vorkommt. Mehrere Antworten sind möglich.",
     hint: "Denken Sie auch an Versandkartons, Folien, Paletten und andere Transportverpackungen.",
     options: [
-      ["brandOwner", "Auf der Verpackung oder Ware steht unser Firmenname oder unsere Marke."],
-      ["physicalProducer", "Wir stellen leere Verpackungen her oder bearbeiten sie."],
-      ["packFiller", "Wir füllen oder verpacken unsere eigenen Waren selbst."],
-      ["nonEuImport", "Wir kaufen Verpackungen oder verpackte Waren direkt außerhalb der EU ein."],
-      ["supply", "Wir liefern leere Verpackungen oder Verpackungsmaterial an andere Betriebe."],
-      ["resell", "Wir handeln bereits verpackte Waren weiter, ohne die Verpackung zu verändern."],
-      ["fulfilment", "Wir lagern, verpacken oder versenden Waren im Auftrag anderer Betriebe."],
-      ["representative", "Wir übernehmen schriftlich PPWR- oder Verpackungspflichten für einen anderen Betrieb."],
-      ["none", "Keine dieser Tätigkeiten trifft zu."]
+      ["brandOwner", "Auf der Verpackung oder Ware steht unser Firmenname oder unsere Marke.", "Beispiel: Sie verkaufen Marmelade im Glas unter Ihrer eigenen Marke."],
+      ["physicalProducer", "Wir stellen leere Verpackungen her oder bearbeiten sie.", "Beispiel: Sie fertigen Kartons oder bedrucken Tragetaschen für andere Betriebe."],
+      ["packFiller", "Wir füllen oder verpacken unsere eigenen Waren selbst.", "Beispiel: Sie legen selbst hergestellte Seifen in zugekaufte Schachteln."],
+      ["nonEuImport", "Wir kaufen Verpackungen oder verpackte Waren direkt außerhalb der EU ein.", "Beispiel: Sie bestellen bereits verpackte Elektrogeräte unmittelbar bei einem Lieferanten in China."],
+      ["supply", "Wir liefern leere Verpackungen oder Verpackungsmaterial an andere Betriebe.", "Beispiel: Sie liefern leere Flaschen, Folienrollen oder Kartonzuschnitte an einen Abfüller."],
+      ["resell", "Wir handeln bereits verpackte Waren weiter, ohne die Verpackung zu verändern.", "Beispiel: Sie kaufen verpackte Produkte beim Hersteller und verkaufen sie unverändert im Großhandel weiter."],
+      ["fulfilment", "Wir lagern, verpacken oder versenden Waren im Auftrag anderer Betriebe.", "Beispiel: Sie betreiben ein Lager und verschicken die Onlinebestellungen eines Kunden."],
+      ["representative", "Wir übernehmen schriftlich PPWR- oder Verpackungspflichten für einen anderen Betrieb.", "Beispiel: Ein ausländisches Unternehmen bestellt Sie schriftlich als Bevollmächtigten in Österreich."],
+      ["none", "Keine dieser Tätigkeiten trifft zu.", "Beispiel: Sie kaufen verpackte Produkte nur für den eigenen Betrieb und geben sie nicht weiter."]
     ]
   },
   packagingSource: {
