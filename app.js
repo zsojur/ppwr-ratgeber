@@ -19,34 +19,36 @@ const countries = [
 const questions = {
   activity: {
     id: "activity", type: "checkbox",
-    title: "Was macht Ihr Betrieb mit Verpackungen oder verpackten Waren?",
-    help: "Wählen Sie alles aus, was regelmäßig vorkommt. Mehrere Antworten sind möglich.",
-    hint: "Denken Sie auch an Versandkartons, Folien, Paletten und andere Transportverpackungen.",
+    title: "Welche Situationen kommen in Ihrem Betrieb vor?",
+    help: "Wählen Sie alle passenden Situationen aus. Die Antworten schließen einander nicht aus.",
+    purpose: "Ein Betrieb kann für verschiedene Verpackungen unterschiedliche Rollen haben. Entscheidend ist daher nicht nur, was Sie mit Ihrer Ware tun, sondern auch welche Verpackung Sie dafür verwenden.",
+    hint: "Typische Kombination: Sie verpacken Ihr eigenes Produkt in einer gebrandeten Schachtel und legen diese anschließend in einen neutralen Standard-Versandkarton. Wählen Sie in diesem Fall alle drei passenden Antworten aus.",
     options: [
-      ["brandOwner", "Auf der Verpackung oder Ware steht unser Firmenname oder unsere Marke.", "Beispiel: Sie verkaufen Marmelade im Glas unter Ihrer eigenen Marke."],
-      ["physicalProducer", "Wir stellen leere Verpackungen her oder bearbeiten sie.", "Beispiel: Sie fertigen Kartons oder bedrucken Tragetaschen für andere Betriebe."],
-      ["packFiller", "Wir füllen oder verpacken unsere eigenen Waren selbst.", "Beispiel: Sie legen selbst hergestellte Seifen in zugekaufte Schachteln."],
-      ["neutralTransport", "Wir kaufen fertige, neutrale Transport- oder Versandverpackungen als Standardware zu.", "Beispiel: Sie kaufen unbedruckte Standardkartons, Paletten oder Stretchfolie und verwenden diese unverändert für Ihre Waren."],
+      ["packFiller", "Wir füllen oder verpacken unsere eigenen Waren selbst.", "Beispiel: Sie legen selbst hergestellte Seifen in Schachteln und verschließen diese."],
+      ["brandOwner", "Wir verwenden gebrandete oder eigens für uns angefertigte Verpackungen.", "Beispiel: Auf der Verpackung steht Ihr Logo oder der Karton wurde nach Ihren besonderen Maßen und Vorgaben hergestellt."],
+      ["neutralTransport", "Wir verwenden zusätzlich oder ausschließlich neutrale Transport- oder Versandverpackungen als Standardware.", "Beispiel: Sie kaufen unbedruckte Standardkartons, Paletten oder Stretchfolie beim Verpackungshändler und verwenden sie unverändert."],
+      ["physicalProducer", "Wir stellen leere Verpackungen für andere Betriebe her oder bearbeiten sie.", "Beispiel: Sie fertigen Kartons oder bedrucken Tragetaschen im Auftrag eines Kunden."],
+      ["supply", "Wir verkaufen leere Verpackungen oder Verpackungsmaterial, ohne sie selbst zu befüllen.", "Beispiel: Sie handeln mit leeren Flaschen, Folienrollen oder Kartonzuschnitten."],
+      ["resell", "Wir verkaufen bereits verpackte Waren unverändert weiter.", "Beispiel: Sie kaufen verpackte Produkte beim Hersteller und verkaufen sie im Großhandel oder Geschäft weiter."],
       ["nonEuImport", "Wir kaufen Verpackungen oder verpackte Waren direkt außerhalb der EU ein.", "Beispiel: Sie bestellen bereits verpackte Elektrogeräte unmittelbar bei einem Lieferanten in China."],
-      ["supply", "Wir liefern leere Verpackungen oder Verpackungsmaterial an andere Betriebe.", "Beispiel: Sie liefern leere Flaschen, Folienrollen oder Kartonzuschnitte an einen Abfüller."],
-      ["resell", "Wir handeln bereits verpackte Waren weiter, ohne die Verpackung zu verändern.", "Beispiel: Sie kaufen verpackte Produkte beim Hersteller und verkaufen sie unverändert im Großhandel weiter."],
       ["fulfilment", "Wir lagern, verpacken oder versenden Waren im Auftrag anderer Betriebe.", "Beispiel: Sie betreiben ein Lager und verschicken die Onlinebestellungen eines Kunden."],
       ["representative", "Wir übernehmen schriftlich PPWR- oder Verpackungspflichten für einen anderen Betrieb.", "Beispiel: Ein ausländisches Unternehmen bestellt Sie schriftlich als Bevollmächtigten in Österreich."],
       ["none", "Keine dieser Tätigkeiten trifft zu.", "Beispiel: Sie kaufen verpackte Produkte nur für den eigenen Betrieb und geben sie nicht weiter."]
     ]
   },
   packagingSource: {
-    id: "packagingSource", type: "radio",
-    title: "Wer bestimmt, wie die Verpackung aussieht?",
-    help: "Wählen Sie die Antwort, die für den größten Teil Ihrer Verpackungen passt.",
-    hint: "Wenn es je nach Verpackung unterschiedlich ist, wählen Sie „Noch unklar“ und prüfen Sie die Fälle später einzeln.",
+    id: "packagingSource", type: "checkbox",
+    title: "Woher kommen die Verpackungen in Ihrem Betrieb?",
+    help: "Wählen Sie auch hier alle passenden Antworten aus. Produktverpackung und Transportverpackung können unterschiedlich beschafft werden.",
+    purpose: "Diese Unterscheidung zeigt, wer für die Konformität der jeweiligen Verpackung verantwortlich sein kann. Eine gebrandete Sonderanfertigung wird anders beurteilt als ein neutraler Standardkarton.",
+    hint: "Beispiel: Eigene Produktverpackung mit Logo plus neutraler Versandkarton aus dem Standardsortiment – wählen Sie „gebrandet oder individuell“ und „neutrale Standardverpackung“.",
     options: [
-      ["ownBrand", "Wir bestimmen Form oder Gestaltung; unsere Marke oder unser Name steht darauf."],
-      ["standardB2B", "Wir kaufen eine fertige Standardverpackung für Betriebe, zum Beispiel neutrale Kartons."],
-      ["customerBrand", "Unser Kunde gibt Gestaltung und Marke vor; wir stellen für ihn her."],
-      ["retailMaterial", "Wir verwenden Material aus dem Einzelhandel, zum Beispiel Haushaltsfolie oder Geschenkpapier."],
-      ["reused", "Wir verwenden eine bereits gebrauchte Verpackung noch einmal."],
-      ["unknown", "Noch unklar oder je nach Verpackung unterschiedlich."]
+      ["ownBrand", "Gebrandete oder individuell angefertigte Verpackung", "Unsere Marke oder unser Name steht darauf oder die Verpackung wird nach unseren besonderen Maßen und Vorgaben hergestellt."],
+      ["standardB2B", "Neutrale Standardverpackung vom gewerblichen Anbieter", "Wir kaufen zum Beispiel unbedruckte Standardkartons, Paletten oder Stretchfolie aus einem fertigen Betriebssortiment."],
+      ["customerBrand", "Verpackung nach den Vorgaben unseres Kunden", "Unser Kunde bestimmt Gestaltung oder Marke; wir fertigen oder liefern die Verpackung für ihn."],
+      ["retailMaterial", "Material aus dem Einzelhandel für den Privatgebrauch", "Wir verwenden zum Beispiel Haushaltsfolie, Geschenkpapier oder Luftpolsterfolie aus einem normalen Privatkundengeschäft."],
+      ["reused", "Bereits gebrauchte Verpackung", "Wir verwenden vorhandene Kartons oder anderes gebrauchtes Verpackungsmaterial erneut."],
+      ["unknown", "Noch unklar", "Wir können Herkunft oder Ausgestaltung einzelner Verpackungen noch nicht sicher zuordnen."]
     ]
   },
   customers: {
@@ -199,11 +201,13 @@ function renderQuestion() {
   const purpose = question.purpose ? `<aside class="question-purpose"><strong>Warum wir das fragen</strong><p>${question.purpose}</p></aside>` : "";
   const hint = question.hint ? `<aside class="question-hint"><strong>Hinweis</strong><span>${question.hint}</span></aside>` : "";
   stage.innerHTML = `<fieldset class="question-step"><legend class="sr-only">${question.title}</legend><h3>${question.title}</h3><p class="question-help">${question.help}</p>${purpose}${hint}${choices}</fieldset>`;
-  const noneInput = stage.querySelector('input[value="none"]');
-  if (noneInput) {
-    stage.querySelectorAll("input").forEach((input) => input.addEventListener("change", () => {
-      if (input.value === "none" && input.checked) stage.querySelectorAll("input").forEach((other) => { if (other !== input) other.checked = false; });
-      else if (input.checked) noneInput.checked = false;
+  if (question.type === "checkbox") {
+    const exclusiveValues = new Set(["none", "unknown", "unsure", "mixed"]);
+    const inputs = [...stage.querySelectorAll("input")];
+    inputs.forEach((input) => input.addEventListener("change", () => {
+      if (!input.checked) return;
+      if (exclusiveValues.has(input.value)) inputs.forEach((other) => { if (other !== input) other.checked = false; });
+      else inputs.forEach((other) => { if (exclusiveValues.has(other.value)) other.checked = false; });
     }));
   }
   stage.querySelector("input")?.focus({ preventScroll: true });
@@ -261,7 +265,7 @@ function getRoles() {
     add("Lieferant", "Technische Daten", "Sie liefern Verpackungen oder Material beziehungsweise fertigen unter der Marke und nach Vorgaben eines Kunden. Stellen Sie dem Erzeuger die Daten bereit, die er für seine Konformitätsbewertung benötigt.");
   }
   if (acts.has("resell") || acts.has("neutralTransport") || (acts.has("packFiller") && (source.has("standardB2B") || source.has("reused")))) {
-    add("Vertreiber", "Sorgfalt", "Sie stellen bereits erzeugte Verpackungen oder verpackte Waren in der Lieferkette bereit. Prüfen Sie insbesondere die Identifikation und Kennzeichnung von Erzeuger und gegebenenfalls Importeur.");
+    add("Vertreiber", "Je Verpackung", "Diese Rolle kommt insbesondere für zugekaufte neutrale Standard-Transport- und Versandverpackungen, wiederverwendete Verpackungen oder unverändert weiterverkaufte Waren in Betracht. Prüfen Sie die Angaben von Erzeuger und gegebenenfalls Importeur.");
   }
   if (customers.has("consumers") || customers.has("businessEnd")) {
     add("Letztvertreiber", "Endabgabe", "Sie liefern verpackte Produkte an Endabnehmer. Je nach Verpackung können zusätzlich Rücknahme-, Informations-, Mehrweg- oder Wiederbefüllungspflichten gelten.");
@@ -316,7 +320,7 @@ function answerLabel(id) {
 function showResults() {
   const roles = getRoles();
   const actions = getActions(roles);
-  $("#result-intro").textContent = `${roles.length} mögliche ${roles.length === 1 ? "Rolle wurde" : "Rollen wurden"} erkannt. Das Ergebnis zeigt Prüfbedarf und ersetzt keine Einzelfallbeurteilung.`;
+  $("#result-intro").textContent = `${roles.length} mögliche ${roles.length === 1 ? "Rolle wurde" : "Rollen wurden"} erkannt. Mehrere Rollen können gleichzeitig gelten – zum Beispiel Erzeuger für die gebrandete Produktverpackung und Vertreiber für den neutralen Versandkarton.`;
   $("#role-results").innerHTML = roles.map((role) => {
     const [label, slug] = role.link;
     return `<article class="role-card"><div class="role-top"><h4>${role.name}</h4><span class="role-tag">${role.tag}</span></div><p>${role.text}</p><a class="role-link" href="${WKO_BASE}${slug}" target="_blank" rel="noopener">${label} <span aria-hidden="true">↗</span></a></article>`;
