@@ -1,4 +1,4 @@
-# PPWR-Ratgeber
+# Zsombors PPWR Guide
 
 Ein interaktiver Ratgeber zur Verordnung (EU) 2025/40 über Verpackungen und Verpackungsabfälle, kurz PPWR.
 
