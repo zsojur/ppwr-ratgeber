@@ -26,6 +26,7 @@ const questions = {
       ["brandOwner", "Auf der Verpackung oder Ware steht unser Firmenname oder unsere Marke.", "Beispiel: Sie verkaufen Marmelade im Glas unter Ihrer eigenen Marke."],
       ["physicalProducer", "Wir stellen leere Verpackungen her oder bearbeiten sie.", "Beispiel: Sie fertigen Kartons oder bedrucken Tragetaschen für andere Betriebe."],
       ["packFiller", "Wir füllen oder verpacken unsere eigenen Waren selbst.", "Beispiel: Sie legen selbst hergestellte Seifen in zugekaufte Schachteln."],
+      ["neutralTransport", "Wir kaufen fertige, neutrale Transport- oder Versandverpackungen als Standardware zu.", "Beispiel: Sie kaufen unbedruckte Standardkartons, Paletten oder Stretchfolie und verwenden diese unverändert für Ihre Waren."],
       ["nonEuImport", "Wir kaufen Verpackungen oder verpackte Waren direkt außerhalb der EU ein.", "Beispiel: Sie bestellen bereits verpackte Elektrogeräte unmittelbar bei einem Lieferanten in China."],
       ["supply", "Wir liefern leere Verpackungen oder Verpackungsmaterial an andere Betriebe.", "Beispiel: Sie liefern leere Flaschen, Folienrollen oder Kartonzuschnitte an einen Abfüller."],
       ["resell", "Wir handeln bereits verpackte Waren weiter, ohne die Verpackung zu verändern.", "Beispiel: Sie kaufen verpackte Produkte beim Hersteller und verkaufen sie unverändert im Großhandel weiter."],
@@ -259,7 +260,7 @@ function getRoles() {
   if (acts.has("supply") || source.has("customerBrand") || (acts.has("physicalProducer") && source.has("customerBrand"))) {
     add("Lieferant", "Technische Daten", "Sie liefern Verpackungen oder Material beziehungsweise fertigen unter der Marke und nach Vorgaben eines Kunden. Stellen Sie dem Erzeuger die Daten bereit, die er für seine Konformitätsbewertung benötigt.");
   }
-  if (acts.has("resell") || (acts.has("packFiller") && (source.has("standardB2B") || source.has("reused")))) {
+  if (acts.has("resell") || acts.has("neutralTransport") || (acts.has("packFiller") && (source.has("standardB2B") || source.has("reused")))) {
     add("Vertreiber", "Sorgfalt", "Sie stellen bereits erzeugte Verpackungen oder verpackte Waren in der Lieferkette bereit. Prüfen Sie insbesondere die Identifikation und Kennzeichnung von Erzeuger und gegebenenfalls Importeur.");
   }
   if (customers.has("consumers") || customers.has("businessEnd")) {
